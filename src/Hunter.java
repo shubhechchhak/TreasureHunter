@@ -129,12 +129,12 @@ public class Hunter {
      * @return The printable String representation of the inventory.
      */
     public String getInventory() {
-        String printableKit = "";
+        String printableKit = Colors.PURPLE + "" + Colors.RESET;
         String space = " ";
 
         for (String item : kit) {
             if (item != null) {
-                printableKit += item + space;
+                printableKit += Colors.PURPLE + item + Colors.RESET + space;
             }
         }
 
