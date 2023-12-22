@@ -39,6 +39,14 @@ public class Hunter {
         }
     }
 
+    public boolean ifGoldGone() {
+        if(gold <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Buys an item from a shop.
      *

@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
+    public boolean gameOver = false;
     private String mode;
 
     /**
@@ -55,8 +56,8 @@ public class TreasureHunter {
         hunter = new Hunter(name, 10);
 
         System.out.print("Easy, Normal or Hard mode? (e, n, h): ");
-        mode = SCANNER.nextLine().toLowerCase();
-        if (mode.equals("test")) {
+        String hard = SCANNER.nextLine().toLowerCase();
+        if (hard.equals("test")) {
             hardMode = false;
             hunter = new Hunter(name, 158);
             hunter.buyItem("water", 2);
@@ -65,13 +66,13 @@ public class TreasureHunter {
             hunter.buyItem("horse", 12);
             hunter.buyItem("boat", 20);
             hunter.buyItem("boots", 14);
-        } else if (mode.equals("e")) {
+        } else if (hard.equals("e")) {
             easyMode = true;
             hunter = new Hunter(name, 20);
-        } else if (mode.equals("n")) {
+        } else if (hard.equals("n")) {
             hardMode = false;
             easyMode = false;
-        } else if (mode.equals("h")) {
+        } else if (hard.equals("h")) {
             hardMode = true;
         }
     }
@@ -153,7 +154,7 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if (choice.equals("d")) {
-            currentTown.digForGold();
+                currentTown.digForGold();
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else {
