@@ -17,8 +17,8 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
-    public boolean gameOver = false;
     private String mode;
+    private boolean gameOver;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -31,16 +31,18 @@ public class TreasureHunter {
         easyMode = false;
     }
 
-    public String getMode() {
-        return mode;
-    }
     /**
      * Starts the game; this is the only public method
      */
     public void play() {
         welcomePlayer();
-        enterTown();
-        showMenu();
+        System.out.println(gameOver);
+        while (!gameOver) {
+            gameOver = hunter.ifGameOver();
+            enterTown();
+            showMenu();
+        }
+        System.out.println("Game over! :(");
     }
 
     /**
@@ -54,6 +56,7 @@ public class TreasureHunter {
 
         // set hunter instance variable
         hunter = new Hunter(name, 10);
+        gameOver = hunter.ifGameOver();
 
         System.out.print("Easy, Normal or Hard mode? (e, n, h): ");
         String hard = SCANNER.nextLine().toLowerCase();
