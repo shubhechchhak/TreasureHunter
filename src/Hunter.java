@@ -9,7 +9,7 @@ public class Hunter {
     private String hunterName;
     private String[] kit;
     private int gold;
-    public boolean gameOver;
+    private boolean gameOver = false;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -28,10 +28,10 @@ public class Hunter {
         return hunterName;
     }
 
-    public boolean ifGameOver() {
-        goldGone();
+    public boolean getGameOver() {
         return gameOver;
     }
+
 
     /**
      * Updates the amount of gold the hunter has.
@@ -42,17 +42,10 @@ public class Hunter {
         gold += modifier;
         if (gold < 0) {
             gold = 0;
-            gameOver = true;
+            TreasureHunter.setGameOver();
         }
     }
 
-    public void goldGone() {
-        if (gold <= 0) {
-            gameOver = true;
-        } else {
-            gameOver = false;
-        }
-    }
 
     /**
      * Buys an item from a shop.

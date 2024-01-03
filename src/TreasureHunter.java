@@ -18,7 +18,7 @@ public class TreasureHunter {
     private boolean hardMode;
     private boolean easyMode;
     private String mode;
-    private boolean gameOver;
+    private static boolean gameOver = false;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -31,18 +31,17 @@ public class TreasureHunter {
         easyMode = false;
     }
 
+    public static void setGameOver() {
+        gameOver = true;
+    }
+
     /**
      * Starts the game; this is the only public method
      */
     public void play() {
         welcomePlayer();
-        System.out.println(gameOver);
-        while (!gameOver) {
-            gameOver = hunter.ifGameOver();
-            enterTown();
-            showMenu();
-        }
-        System.out.println("Game over! :(");
+        enterTown();
+        showMenu();
     }
 
     /**
@@ -55,8 +54,7 @@ public class TreasureHunter {
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
-        hunter = new Hunter(name, 10);
-        gameOver = hunter.ifGameOver();
+        hunter = new Hunter(name, 2);
 
         System.out.print("Easy, Normal or Hard mode? (e, n, h): ");
         String hard = SCANNER.nextLine().toLowerCase();
@@ -122,7 +120,7 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
 
-        while (!choice.equals("x")) {
+        while (!gameOver && !choice.equals("x")) {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
@@ -138,6 +136,11 @@ public class TreasureHunter {
             System.out.print("What's your next move? ");
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
+        }
+        if (choice.equals("x")) {
+            System.out.println("Game over! Bye!");
+        } else {
+            System.out.println("Game OVER! You Lose!" + Colors.RED + " You ran out of gold!" + Colors.RESET);
         }
     }
 
